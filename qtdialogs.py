@@ -872,9 +872,9 @@ class DlgWalletDetails(ArmoryDialog):
       self.lblSpendFunds.setText(spdStr)
       self.lblUnconfFunds.setText(ucnStr)
 
-      self.lblBTC1.setText('<b><font color="%s">BTC</font></b>'%lblcolor)
-      self.lblBTC2.setText('<b>BTC</b>')
-      self.lblBTC3.setText('<b>BTC</b>')
+      self.lblBTC1.setText('<b><font color="%s">TRC</font></b>'%lblcolor)
+      self.lblBTC2.setText('<b>TRC</b>')
+      self.lblBTC3.setText('<b>TRC</b>')
 
 
    #############################################################################
@@ -2529,7 +2529,7 @@ class DlgVerifySweep(ArmoryDialog):
       #frmLayout.addWidget(QRichLabel('Funds will be <i>swept</i>...'), 0,0, 1,2)
       frmLayout.addWidget(QRichLabel('      From ' + inputStr, doWrap=False), 1,0, 1,2)
       frmLayout.addWidget(QRichLabel('      To ' + outputStr, doWrap=False),  2,0, 1,2)
-      frmLayout.addWidget(QRichLabel('      Total <b>%s</b> BTC %s'%(outStr,feeStr), doWrap=False),  3,0, 1,2)
+      frmLayout.addWidget(QRichLabel('      Total <b>%s</b> TRC %s'%(outStr,feeStr), doWrap=False),  3,0, 1,2)
       frm.setLayout(frmLayout)
 
       lblFinalConfirm = QLabel('Are you sure you want to execute this transaction?')
@@ -3149,9 +3149,9 @@ class DlgAddressInfo(ArmoryDialog):
       if cppAddr.getSpendableBalance()>0:
          goodColor = htmlColor('MoneyPos')
          lbls[-1].append( QRichLabel( \
-            '<font color=' + goodColor + '>' + balStr.strip() + '</font> BTC' ))
+            '<font color=' + goodColor + '>' + balStr.strip() + '</font> TRC' ))
       else:   
-         lbls[-1].append( QRichLabel( balStr.strip() + ' BTC'))
+         lbls[-1].append( QRichLabel( balStr.strip() + ' TRC'))
 
 
       # Number of transactions
@@ -4057,11 +4057,11 @@ class DlgRemoveWallet(ArmoryDialog):
          lbls.append([])
          lbls[3].append(QLabel('Current Balance (w/ unconfirmed):'))
          if bal>0:
-            lbls[3].append(QLabel('<font color="red"><b>'+coin2str(bal, maxZeros=1).strip()+' BTC</b></font>'))
+            lbls[3].append(QLabel('<font color="red"><b>'+coin2str(bal, maxZeros=1).strip()+' TRC</b></font>'))
             lbls[3][-1].setTextFormat(Qt.RichText)
             wltEmpty = False
          else:
-            lbls[3].append(QLabel(coin2str(bal, maxZeros=1) + ' BTC'))
+            lbls[3].append(QLabel(coin2str(bal, maxZeros=1) + ' TRC'))
 
 
       # Add two WARNING images on either side of dialog
@@ -4347,11 +4347,11 @@ class DlgRemoveAddress(ArmoryDialog):
          lbls.append([])
          lbls[-1].append(QLabel('Address Balance (w/ unconfirmed):'))
          if bal>0:
-            lbls[-1].append(QLabel('<font color="red"><b>'+coin2str(bal, maxZeros=1)+' BTC</b></font>'))
+            lbls[-1].append(QLabel('<font color="red"><b>'+coin2str(bal, maxZeros=1)+' TRC</b></font>'))
             lbls[-1][-1].setTextFormat(Qt.RichText)
             addrEmpty = False
          else:
-            lbls[3].append(QLabel(coin2str(bal, maxZeros=1) + ' BTC'))
+            lbls[3].append(QLabel(coin2str(bal, maxZeros=1) + ' TRC'))
 
 
       # Add two WARNING images on either side of dialog
@@ -4604,7 +4604,7 @@ class DlgConfirmSend(ArmoryDialog):
       sumStr = coin2str(totalSend, maxZeros=1)
 
       lblMsg = QRichLabel(
-         'You are about to spend <b>%s BTC</b> from wallet "<b>%s</b>" (%s).  You '
+         'You are about to spend <b>%s TRC</b> from wallet "<b>%s</b>" (%s).  You '
          'specified the following distribution:' % (sumStr, wlt.labelName, wlt.uniqueIDB58))
 
 
@@ -4745,7 +4745,7 @@ class DlgSendBitcoins(ArmoryDialog):
       lbls.append( QRichLabel("Wallet ID:", doWrap=False) )
       lbls.append( QRichLabel("Name:", doWrap=False))
       lbls.append( QRichLabel("Description:", doWrap=False))
-      lbls.append( QRichLabel("Spendable BTC:", doWrap=False))
+      lbls.append( QRichLabel("Spendable TRC:", doWrap=False))
 
       for i in range(len(lbls)):
          lbls[i].setAlignment(Qt.AlignLeft | Qt.AlignTop)
@@ -5073,7 +5073,7 @@ class DlgSendBitcoins(ArmoryDialog):
          if result[1]==True:
             self.main.writeSetting('DonateDNAA', True)
       
-      hexgeom = self.main.settings.get('SendBtcGeometry')
+      hexgeom = self.main.settings.get('SendTRCGeometry')
       if len(hexgeom)>0:
          geom = QByteArray.fromHex(hexgeom)
          self.restoreGeometry(geom)
@@ -5089,7 +5089,7 @@ class DlgSendBitcoins(ArmoryDialog):
 
    #############################################################################
    def saveGeometrySettings(self):
-      self.main.writeSetting('SendBtcGeometry', str(self.saveGeometry().toHex()))
+      self.main.writeSetting('SendTRCGeometry', str(self.saveGeometry().toHex()))
 
    #############################################################################
    def closeEvent(self, event):
@@ -5239,7 +5239,7 @@ class DlgSendBitcoins(ArmoryDialog):
             value    = str2coin(valueStr, negAllowed=False)
             if value==0:
                QMessageBox.critical(self, 'Zero Amount', \
-                  'You cannot send 0 BTC to any recipients.  <br>Please enter '
+                  'You cannot send 0 TRC to any recipients.  <br>Please enter '
                   'a positive amount for recipient %d.' % (i+1), QMessageBox.Ok)
                return False
 
@@ -5251,7 +5251,7 @@ class DlgSendBitcoins(ArmoryDialog):
          except TooMuchPrecisionError:
             QMessageBox.critical(self, 'Too much precision', \
                'Terracoins can only be specified down to 8 decimal places. '
-               'The smallest value that can be sent is  0.0000 0001 BTC. '
+               'The smallest value that can be sent is  0.0000 0001 TRC. '
                'Please enter a new amount for recipient %d.' % (i+1), QMessageBox.Ok)
             return False
          except ValueError:
@@ -5280,12 +5280,12 @@ class DlgSendBitcoins(ArmoryDialog):
       except TooMuchPrecisionError:
          QMessageBox.critical(self, 'Too much precision', \
             'Terracoins can only be specified down to 8 decimal places. '
-            'The smallest meaning Terracoin amount is 0.0000 0001 BTC. '
+            'The smallest meaning Terracoin amount is 0.0000 0001 TRC. '
             'Please enter a fee of at least 0.0000 0001', QMessageBox.Ok)
          return False
       except:
          QMessageBox.critical(self, 'Invalid Fee String', \
-            'The fee you specified is invalid.  A standard fee is 0.0005 BTC, '
+            'The fee you specified is invalid.  A standard fee is 0.0005 TRC, '
             'though some transactions may succeed with zero fee.', QMessageBox.Ok)
          LOGERROR('Invalid fee specified: "%s"', feeStr)
          return False
@@ -5297,12 +5297,12 @@ class DlgSendBitcoins(ArmoryDialog):
          valMax = coin2str(bal,           maxZeros=2).strip()
          if self.altBalance==None:
             QMessageBox.critical(self, 'Insufficient Funds', \
-            'You just tried to send %s BTC, including fee, but you only '
-            'have %s BTC (spendable) in this wallet!' % (valTry, valMax), QMessageBox.Ok)
+            'You just tried to send %s TRC, including fee, but you only '
+            'have %s TRC (spendable) in this wallet!' % (valTry, valMax), QMessageBox.Ok)
          else:
             QMessageBox.critical(self, 'Insufficient Funds', \
-            'You just tried to send %s BTC, including fee, but you only '
-            'have %s BTC with this coin control selection!' % (valTry, valMax), QMessageBox.Ok)
+            'You just tried to send %s TRC, including fee, but you only '
+            'have %s TRC with this coin control selection!' % (valTry, valMax), QMessageBox.Ok)
          return False
       
 
@@ -5330,11 +5330,11 @@ class DlgSendBitcoins(ArmoryDialog):
                'You have specified a valid amount to send, but the required '
                'transaction fee causes this transaction to exceed your balance.  '
                'In order to send this transaction, you will be required to '
-               'pay a fee of <b>' + coin2str(minFeeRec[1], maxZeros=0).strip() + ' BTC</b>.  '
+               'pay a fee of <b>' + coin2str(minFeeRec[1], maxZeros=0).strip() + ' TRC</b>.  '
                '<br><br>'
                'Please go back and adjust the value of your transaction, not '
                'to exceed a total of <b>' + coin2str(bal-minFeeRec[1], maxZeros=0).strip() +
-               ' BTC</b> (the necessary fee has been entered into the form, so you '
+               ' TRC</b> (the necessary fee has been entered into the form, so you '
                'can use the "MAX" button to enter the remaining balance for a '
                'recipient).', QMessageBox.Ok)
             return
@@ -5347,9 +5347,9 @@ class DlgSendBitcoins(ArmoryDialog):
          msgBtns = QMessageBox.Yes | QMessageBox.Cancel
 
          reply = QMessageBox.warning(self, 'Insufficient Fee', \
-            'The fee you have specified (%s BTC) is insufficient for the size '
+            'The fee you have specified (%s TRC) is insufficient for the size '
             'and priority of your transaction.  You must include at least '
-            '%s BTC to send this transaction.  \n\nDo you agree to the fee of %s BTC?  ' % \
+            '%s TRC to send this transaction.  \n\nDo you agree to the fee of %s TRC?  ' % \
             (feeStr, minRecStr, minRecStr),  msgBtns)
          if reply == QMessageBox.Cancel:
             return False
@@ -5649,7 +5649,7 @@ class DlgSendBitcoins(ArmoryDialog):
          self.widgetTable[r][-1].setMaximumHeight(self.maxHeight)
          self.widgetTable[r][-1].setAlignment(Qt.AlignLeft)
       
-         self.widgetTable[r].append( QLabel('BTC') )
+         self.widgetTable[r].append( QLabel('TRC') )
          self.widgetTable[r][-1].setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
          #self.widgetTable[r].append( QPushButton('MAX') )
@@ -6498,7 +6498,7 @@ class DlgReviewOfflineTx(ArmoryDialog):
 
          ##### 3
          if self.leValue:
-            self.infoLbls[3][2].setText(coin2str(self.leValue, maxZeros=0).strip() + '  BTC')
+            self.infoLbls[3][2].setText(coin2str(self.leValue, maxZeros=0).strip() + '  TRC')
          else:
             self.infoLbls[3][2].setText('')
 
@@ -7058,7 +7058,7 @@ class DlgTxFeeOptions(ArmoryDialog):
          'the Terracoin network to process transactions and keep it secure.') 
       lblDescr2 = QLabel( \
          'Nearly all transactions are guaranteed to be '
-         'processed if a fee of 0.0005 BTC is included (less than $0.01 USD).  You '
+         'processed if a fee of 0.0005 TRC is included (less than $0.01 USD).  You '
          'will be prompted for confirmation if a higher fee amount is required for '
          'your transaction.')
 
@@ -7431,7 +7431,7 @@ class DlgDispTxInfo(ArmoryDialog):
                'to determine which is which, and so this fields shows the sum '
                'of <b>all</b> outputs.'))
          lbls[-1].append(QLabel('Sum of Outputs:'))
-         lbls[-1].append(QLabel( coin2str(txAmt, maxZeros=1).strip() + '  BTC' ))
+         lbls[-1].append(QLabel( coin2str(txAmt, maxZeros=1).strip() + '  TRC' ))
       else:
          lbls.append([])
          lbls[-1].append(createToolTipObject(
@@ -7444,7 +7444,7 @@ class DlgDispTxInfo(ArmoryDialog):
                'The value shown here is the net effect on your '
                'wallet, including transaction fee.'))
          lbls[-1].append(QLabel('Transaction Amount:'))
-         lbls[-1].append(QRichLabel( coin2str(txAmt, maxZeros=1).strip()  + '  BTC'))
+         lbls[-1].append(QRichLabel( coin2str(txAmt, maxZeros=1).strip()  + '  TRC'))
          if txAmt<0:
             lbls[-1][-1].setText('<font color="red">'+lbls[-1][-1].text()+'</font> ')
          elif txAmt>0:
@@ -7458,7 +7458,7 @@ class DlgDispTxInfo(ArmoryDialog):
             'Transaction fees go to users supplying the Terracoin network with '
             'computing power for processing transactions and maintaining security.'))
          lbls[-1].append(QLabel('Tx Fee Paid:'))
-         lbls[-1].append(QLabel( coin2str(fee, maxZeros=0).strip() + '  BTC'))
+         lbls[-1].append(QLabel( coin2str(fee, maxZeros=0).strip() + '  TRC'))
 
 
 
@@ -7497,7 +7497,7 @@ class DlgDispTxInfo(ArmoryDialog):
                rlbls[-1].extend([QLabel(), QLabel()])
             rlbls[-1].append(QLabel(hash160_to_addrStr(rv[0])))
             if numRV>1:
-               rlbls[-1].append(QLabel(coin2str(rv[1], maxZeros=1) + '  BTC'))
+               rlbls[-1].append(QLabel(coin2str(rv[1], maxZeros=1) + '  TRC'))
             else:
                rlbls[-1].append(QLabel(''))
             ffixBold = GETFONT('Fixed', 10)
@@ -9652,7 +9652,7 @@ class DlgPreferences(ArmoryDialog):
                                  'Fees go to users that contribute computing power '
                                  'to keep the Terracoin network secure and increases '
                                  'the priority of your transactions on the network '
-                                 '(%s BTC is standard).' % \
+                                 '(%s TRC is standard).' % \
                                  coin2str(MIN_TX_FEE, maxZeros=0).strip())
       ttipDefaultFee = createToolTipObject( \
                                  'NOTE: some transactions will require a certain fee '
@@ -9698,8 +9698,8 @@ class DlgPreferences(ArmoryDialog):
       ###############################################################
       # Notifications
       lblNotify = QRichLabel('<b>Enable notifcations from the system-tray:</b>')
-      notifyBtcIn  = self.main.getSettingOrSetDefault('NotifyBtcIn',  True)
-      notifyBtcOut = self.main.getSettingOrSetDefault('NotifyBtcOut', True)
+      notifyBtcIn  = self.main.getSettingOrSetDefault('NotifyTRCIn',  True)
+      notifyBtcOut = self.main.getSettingOrSetDefault('NotifyTRCOut', True)
       notifyDiscon = self.main.getSettingOrSetDefault('NotifyDiscon', True)
       notifyReconn = self.main.getSettingOrSetDefault('NotifyReconn', True)
 
@@ -9909,7 +9909,7 @@ class DlgPreferences(ArmoryDialog):
       #self.Options.append( ['LineEdit', 'Default_Fee', MIN_TX_FEE, \
                            #'Default fee to include with transactions.', \
                            #'Fees go to users that contribute computing power '
-                           #'to keep the Terracoin network secure (0.0005 BTC is '
+                           #'to keep the Terracoin network secure (0.0005 TRC is '
                            #'standard).', \
                            #'NOTE: some transactions will require a fee '
                            #'regardless of your preferences -- in such cases '
@@ -9923,7 +9923,7 @@ class DlgPreferences(ArmoryDialog):
       except:
          QMessageBox.warning(self, 'Invalid Amount', \
                   'The default fee specified could not be understood.  Please '
-                  'specify in BTC with no more than 8 decimal places.', \
+                  'specify in TRC with no more than 8 decimal places.', \
                   QMessageBox.Ok)
          return
 
@@ -9945,8 +9945,8 @@ class DlgPreferences(ArmoryDialog):
          self.main.writeSetting('MinimizeOrClose', 'Close')
 
       #self.main.writeSetting('LedgDisplayFee', self.chkInclFee.isChecked())
-      self.main.writeSetting('NotifyBtcIn',  self.chkBtcIn.isChecked())
-      self.main.writeSetting('NotifyBtcOut', self.chkBtcOut.isChecked())
+      self.main.writeSetting('NotifyTRCIn',  self.chkBtcIn.isChecked())
+      self.main.writeSetting('NotifyTRCOut', self.chkBtcOut.isChecked())
       self.main.writeSetting('NotifyDiscon', self.chkDiscon.isChecked())
       self.main.writeSetting('NotifyReconn', self.chkReconn.isChecked())
 
@@ -10361,7 +10361,7 @@ class DlgRequestPayment(ArmoryDialog):
          'usually begin with "Click here..." to reaffirm to the user it is '
          'is clickable.')
       ttipAmount = createToolTipObject( \
-         'All amounts are specifed in BTC')
+         'All amounts are specifed in TRC')
       ttipAddress = createToolTipObject( \
          'The person clicking the link will be sending Terracoins to this address')
       ttipMessage = createToolTipObject( \
@@ -10390,7 +10390,7 @@ class DlgRequestPayment(ArmoryDialog):
       layoutEntry.addWidget(ttipAddress,                            i,2)
 
       i+=1
-      layoutEntry.addWidget(QRichLabel('<b>Request (BTC):</b>'),    i,0)
+      layoutEntry.addWidget(QRichLabel('<b>Request (TRC):</b>'),    i,0)
       layoutEntry.addWidget(self.edtAmount,                         i,1)
 
       i+=1
@@ -10533,7 +10533,7 @@ class DlgRequestPayment(ArmoryDialog):
       self.dispText += '<br>'
       self.dispText += '<b>Pay to</b>:\t%s<br>' % addr
       if amtStr:
-         self.dispText += '<b>Amount</b>:\t%s BTC<br>' % coin2str(amt,maxZeros=0).strip()
+         self.dispText += '<b>Amount</b>:\t%s TRC<br>' % coin2str(amt,maxZeros=0).strip()
       if msgStr:
          self.dispText += '<b>Message</b>:\t%s<br>' % msgStr
       self.lblLink.setText(self.dispText)
@@ -10548,7 +10548,7 @@ class DlgRequestPayment(ArmoryDialog):
       self.plainText += 'If clicking on the line above does not work, use this payment info:\n'
       self.plainText += 'Pay to:  %s' % addr
       if amtStr:
-         self.plainText += '\nAmount:  %s BTC' % coin2str(amt,maxZeros=0).strip()
+         self.plainText += '\nAmount:  %s TRC' % coin2str(amt,maxZeros=0).strip()
       if msgStr:
          self.plainText += '\nMessage: %s' % msgStr
       self.plainText += '\n'
