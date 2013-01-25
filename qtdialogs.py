@@ -478,7 +478,7 @@ class DlgPasswd3(ArmoryDialog):
       lblWarnTxt1.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
       lblWarnTxt2 = QLabel( \
          'Armory wallet encryption is designed to be extremely difficult to '
-         'crack, even with GPU-acceleration.  No one can help you recover your bitcoins '
+         'crack, even with GPU-acceleration.  No one can help you recover your Terracoins '
          'if you forget your passphrase. '
          'If you are inclined to forget your passphrase, please write it down '
          'or print a paper backup of your wallet and keep it in a safe place. ')
@@ -627,10 +627,10 @@ class DlgWalletDetails(ArmoryDialog):
          lbtnChangeCrypto = QLabelButton(s)
          self.connect(lbtnChangeCrypto, SIGNAL('clicked()'), self.changeEncryption)
 
-      lbtnSendBtc = QLabelButton('Send Bitcoins')
+      lbtnSendBtc = QLabelButton('Send Terracoins')
       if self.wlt.watchingOnly:
          lbtnSendBtc = QLabelButton('Prepare Offline Transaction')
-      lbtnGenAddr = QLabelButton('Receive Bitcoins')
+      lbtnGenAddr = QLabelButton('Receive Terracoins')
       lbtnImportA = QLabelButton('Import/Sweep Private Keys')
       lbtnDeleteA = QLabelButton('Remove Imported Address')
       #lbtnSweepA  = QLabelButton('Sweep Wallet/Address')
@@ -650,18 +650,18 @@ class DlgWalletDetails(ArmoryDialog):
       self.connect(lbtnExport,  SIGNAL('clicked()'), self.saveWalletCopy)
       self.connect(lbtnForkWlt, SIGNAL('clicked()'), self.forkOnlineWallet)
 
-      lbtnSendBtc.setToolTip('<u></u>Send bitcoins to other users, or transfer '
+      lbtnSendBtc.setToolTip('<u></u>Send Terracoins to other users, or transfer '
                              'between wallets')
       if self.wlt.watchingOnly:
          lbtnSendBtc.setToolTip('<u></u>If you have a full-copy of this wallet '
                                 'on another computer, you can prepare a '
                                 'transaction, to be signed by that computer.')
       lbtnGenAddr.setToolTip('<u></u>Get a new address from this wallet for receiving '
-                             'bitcoins.  Right click on the address list below '
+                             'Terracoins.  Right click on the address list below '
                              'to copy an existing address.')
       lbtnImportA.setToolTip('<u></u>Import or "Sweep" an address which is not part '
                              'of your wallet.  Useful for VanityGen addresses '
-                             'and redeeming Casascius physical bitcoins.')
+                             'and redeeming Casascius physical Terracoins.')
       lbtnDeleteA.setToolTip('<u></u>Permanently delete an imported address from '
                              'this wallet.  You cannot delete addresses that '
                              'were generated natively by this wallet.')
@@ -679,7 +679,7 @@ class DlgWalletDetails(ArmoryDialog):
       lbtnVwKeys.setToolTip('<u></u>View raw private key data for all of the addresses '
                             'in this wallet.  <u>Use this to backup your imported '
                             'addresses!</u>  Can also be used to import Armory '
-                            'addresses into other Bitcoin applications.')
+                            'addresses into other Terracoin applications.')
       lbtnExport.setToolTip('<u></u>Create an exact copy of this wallet (including '
                             'imported addresses).  Use this to backup your '
                             'wallet to digital media (external hard drive, USB, '
@@ -1698,7 +1698,7 @@ class DlgNewAddressDisp(ArmoryDialog):
       offlineWallet = (wlttype==WLTTYPES.Offline)
 
       lblDescr = QLabel( \
-            'The following address can be used to to receive bitcoins:')
+            'The following address can be used to to receive Terracoins:')
       self.edtNewAddr = QLineEdit()
       self.edtNewAddr.setReadOnly(True)
       self.edtNewAddr.setText(addrStr)
@@ -1722,7 +1722,7 @@ class DlgNewAddressDisp(ArmoryDialog):
       tooltip1 = createToolTipObject( \
             'You can securely use this address as many times as you want. '
             'However, all people to whom you give this address will '
-            'be able to see the number and amount of bitcoins <b>ever</b> '
+            'be able to see the number and amount of Terracoins <b>ever</b> '
             'sent to it.  Therefore, using a new address for each transaction '
             'improves overall privacy, but there is no security issues '
             'with reusing any address.' )
@@ -1774,7 +1774,7 @@ class DlgNewAddressDisp(ArmoryDialog):
       frmComment.setLayout(frmCommentLayout)
 
       
-      lblRecvWlt = QRichLabel( 'Bitcoins sent to this address will '
+      lblRecvWlt = QRichLabel( 'Terracoins sent to this address will '
             'appear in the wallet:', doWrap=False)
       
       lblRecvWlt.setWordWrap(True)
@@ -1925,7 +1925,7 @@ class DlgImportAddress(ArmoryDialog):
                      'has access to it.  Otherwise, sweep it to get '
                      'the funds out of it.  All standard private-key formats '
                      'are supported <i>except for private keys created by '
-                     'Bitcoin-Qt version 0.6.0 and later (compressed)</i>.')
+                     'Terracoin-Qt version 0.1.0 and later (compressed)</i>.')
 
       lblPrivOne = QRichLabel('Private Key')
       self.edtPrivData = QLineEdit()
@@ -1934,7 +1934,7 @@ class DlgImportAddress(ArmoryDialog):
                        'Supported formats are any hexadecimal or Base58 '
                        'representation of a 32-byte private key (with or '
                        'without checksums), and mini-private-key format '
-                       'used on Casascius physical bitcoins.  Private keys '
+                       'used on Casascius physical Terracoins.  Private keys '
                        'that use <i>compressed</i> public keys are not yet '
                        'supported by Armory.')
 
@@ -1999,7 +1999,7 @@ class DlgImportAddress(ArmoryDialog):
       sweepTooltip = createToolTipObject( \
          'You should never add an untrusted key to your wallet.  By choosing this '
          'option, you are only moving the funds into your wallet, but not the key '
-         'itself.  You should use this option for Casascius physical bitcoins.')
+         'itself.  You should use this option for Casascius physical Terracoins.')
 
       importTooltip = createToolTipObject( \
          'This option will make the key part of your wallet, meaning that it '
@@ -2072,7 +2072,7 @@ class DlgImportAddress(ArmoryDialog):
          if binary_to_int(binKeyData, BIGENDIAN) >= SECP256K1_ORDER:
             QMessageBox.critical(self, 'Invalid Private Key', \
                'The private key you have entered is actually not valid '
-               'for the elliptic curve used by Bitcoin (secp256k1).  '
+               'for the elliptic curve used by Terracoin (secp256k1).  '
                'Almost any 64-character hex is a valid private key '
                '<b>except</b> for those greater than: '
                '<br><br>'
@@ -2099,7 +2099,7 @@ class DlgImportAddress(ArmoryDialog):
       except CompressedKeyError, e:
          QMessageBox.critical(self, 'Unsupported key type', 'You entered a key '
             'for an address that uses a compressed public key, usually produced '
-            'in Bitcoin-Qt/bitcoind wallets created after version 0.6.0.  Armory '
+            'in Terracoin-Qt/terracoind wallets created after version 0.6.0.  Armory '
             'does not yet support this key type.')
          LOGERROR('Compressed key data recognized but not supported')
          return
@@ -2115,7 +2115,7 @@ class DlgImportAddress(ArmoryDialog):
       if not 'mini' in keyType.lower():
          reply = QMessageBox.question(self, 'Verify Address', \
                'The key data you entered appears to correspond to '
-               'the following Bitcoin address:\n\n\t' + addrStr +
+               'the following Terracoin address:\n\n\t' + addrStr +
                '\n\nIs this the correct address?',
                QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
          if reply==QMessageBox.Cancel:
@@ -2163,7 +2163,7 @@ class DlgImportAddress(ArmoryDialog):
                      '<b>Wallet Name</b>: ' + self.main.walletMap[wltID].labelName + '<br>'
                      '<b>Address Type</b>: ' + typ + 
                      '<br><br>'
-                     'The sweep operation will simply move bitcoins out of the wallet '
+                     'The sweep operation will simply move Terracoins out of the wallet '
                      'above into this wallet.  If the network charges a fee for this '
                      'transaction, you balance will be reduced by that much.')
                result = QMessageBox.warning(self, 'Duplicate Address', msg, \
@@ -2174,7 +2174,7 @@ class DlgImportAddress(ArmoryDialog):
    
          #if not TheBDM.getBDMState()=='BlockchainReady':
             #reply = QMessageBox.critical(self, 'Cannot Sweep Address', \
-            #'You need access to the Bitcoin network and the blockchain in order '
+            #'You need access to the Terracoin network and the blockchain in order '
             #'to find the balance of this address and sweep its funds. ', \
             #QMessageBox.Ok)
             #return
@@ -2340,7 +2340,7 @@ class DlgImportAddress(ArmoryDialog):
             reply = QMessageBox.critical(self, 'Duplicate Addresses!', \
                'You are attempting to sweep %d addresses, but %d of them '
                'are already part of existing wallets.  That means that some or '
-               'all of the bitcoins you sweep may already be owned by you. '
+               'all of the Terracoins you sweep may already be owned by you. '
                '<br><br>'
                'Would you like to continue anyway?' % \
                (len(allWltList), len(dupeWltList)), \
@@ -2561,7 +2561,7 @@ class DlgImportWallet(ArmoryDialog):
       lblImportDescr = QLabel('Chose the wallet import source:')
       self.btnImportFile  = QPushButton("Import Armory wallet from &file")
       self.btnImportPaper = QPushButton("Restore from &paper backup")
-      self.btnMigrate     = QPushButton("Migrate wallet.dat (main Bitcoin App)")
+      self.btnMigrate     = QPushButton("Migrate wallet.dat (main Terracoin App)")
 
       self.btnImportFile.setMinimumWidth(300)
 
@@ -2579,7 +2579,7 @@ class DlgImportWallet(ArmoryDialog):
                                   'data into Armory to recover the wallet.')
 
       ttip3 = createToolTipObject('Migrate all your wallet.dat addresses '
-                                  'from the regular Bitcoin client to an Armory '
+                                  'from the regular Terracoin client to an Armory '
                                   'wallet.')
 
       w,h = relaxedSizeStr(ttip1, '(?)') 
@@ -2640,15 +2640,15 @@ class DlgImportWallet(ArmoryDialog):
 #
 #
 #      lblDescr = QRichLabel( \
-#         'Specify the location of your regular Bitcoin wallet (wallet.dat) '
+#         'Specify the location of your regular Terracoin wallet (wallet.dat) '
 #         'to be migrated into an Armory wallet.  All private '
 #         'keys will be imported, giving you full access to those addresses, as '
 #         'if Armory had generated them natively.'
 #         '<br><br>'
 #         '<b>NOTE:</b> It is strongly recommended that all '
-#         'Bitcoin addresses be used in only one program at a time.  If you '
+#         'Terracoin addresses be used in only one program at a time.  If you '
 #         'import your entire wallet.dat, it is recommended to stop using the '
-#         'regular Bitcoin client, and only use Armory to send transactions.  '
+#         'regular Terracoin client, and only use Armory to send transactions.  '
 #         'Armory developers will not be responsible for coins getting "locked" '
 #         'or "stuck" due to multiple applications attempting to spend coins '
 #         'from the same addresses.')
@@ -2656,9 +2656,9 @@ class DlgImportWallet(ArmoryDialog):
 #      lblSatoshiWlt = QRichLabel('Wallet File to be Migrated (typically ' +
 #                                 os.path.join(BTC_HOME_DIR, 'wallet.dat') + ')', doWrap=False)
 #      ttipWlt = createToolTipObject(\
-#         'This is the wallet file used by the standard Bitcoin client from '
-#         'bitcoin.org.  It contains all the information needed for Armory to '
-#         'know how to access the bitcoins maintained by that program')
+#         'This is the wallet file used by the standard Terracoin client from '
+#         'Terracoin.org.  It contains all the information needed for Armory to '
+#         'know how to access the Terracoins maintained by that program')
 #      self.txtWalletPath = QLineEdit()
 #
 #
@@ -2667,7 +2667,7 @@ class DlgImportWallet(ArmoryDialog):
 #      ttipAllKeys = createToolTipObject( \
 #         'The wallet.dat file typically '
 #         'holds a pool of 100 addresses beyond the ones you ever used. '
-#         'These are the next 100 addresses to be used by the main Bitcoin '
+#         'These are the next 100 addresses to be used by the main Terracoin '
 #         'client for the next 100 transactions.  '
 #         'If you are planning to switch to Armory exclusively, you will not '
 #         'need these addresses')
@@ -2730,7 +2730,7 @@ class DlgImportWallet(ArmoryDialog):
 #      self.setLayout(dlgLayout)
 #
 #      self.setMinimumWidth(500)
-#      self.setWindowTitle('Migrate Bitcoin-Qt Wallet')
+#      self.setWindowTitle('Migrate Terracoin-Qt Wallet')
 #      self.setWindowIcon(QIcon( self.main.iconfile))
 #
 #
@@ -2738,8 +2738,8 @@ class DlgImportWallet(ArmoryDialog):
 #      # Temporarily reset the "LastDir" to where the default wallet.dat is
 #      prevLastDir = self.main.settings.get('LastDirectory')
 #      self.main.writeSetting('LastDirectory', BTC_HOME_DIR)
-#      satoshiWltFile = self.main.getFileLoad('Load Bitcoin Wallet File', \
-#                                             ['Bitcoin Wallets (*.dat)'])
+#      satoshiWltFile = self.main.getFileLoad('Load Terracoin Wallet File', \
+#                                             ['Terracoin Wallets (*.dat)'])
 #      self.main.writeSetting('LastDirectory', prevLastDir)
 #      if len(str(satoshiWltFile))>0:
 #         self.txtWalletPath.setText(satoshiWltFile)
@@ -2864,7 +2864,7 @@ class DlgImportWallet(ArmoryDialog):
 #      wlt = None
 #      if toWalletID==None:
 #         lblShort = 'Migrated wallet.dat'
-#         lblLong  = 'Wallet created to hold addresses from the regular Bitcoin wallet.dat.'
+#         lblLong  = 'Wallet created to hold addresses from the regular Terracoin wallet.dat.'
 #
 #         if not satoshiPassphrase:
 #            wlt = PyBtcWallet().createNewWallet(    \
@@ -2912,7 +2912,7 @@ class DlgImportWallet(ArmoryDialog):
 #               self.nError += 1
 #
 #
-#      DlgExecLongProcess(finallyDoMigrate, "Migrating Bitcoin-Qt Wallet", self, self.main).exec_()
+#      DlgExecLongProcess(finallyDoMigrate, "Migrating Terracoin-Qt Wallet", self, self.main).exec_()
 #
 #
 #      if self.nImport==0:
@@ -3516,13 +3516,13 @@ class DlgEULA(ArmoryDialog):
 
 
       lblPleaseAgree = QRichLabel( \
-         '<b>Armory Bitcoin Client is licensed under the <i>Affero General '
+         '<b>Armory Terracoin Client is licensed under the <i>Affero General '
          'Public License, Version 3 (AGPLv3)</i></b>'
          '<br><br>'
          'Additionally, as a condition of receiving this software '
          'for free, you accept all risks associated with using it '
          'and the developers of Armory will not be held liable for any '
-         'loss of money or bitcoins due to software defects.'
+         'loss of money or Terracoins due to software defects.'
          '<br><br>'
          '<b>Please read the full terms of the license and indicate your '
          'agreement with its terms.</b>')
@@ -3566,26 +3566,26 @@ class DlgIntroMessage(ArmoryDialog):
       lblWelcome = QRichLabel('<b>Welcome to Armory!</b>')
       lblWelcome.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
       lblWelcome.setFont(GETFONT('Var', 14))
-      lblSlogan  = QRichLabel('<i>The most advanced Bitcoin Client on Earth!</i>')
+      lblSlogan  = QRichLabel('<i>The most advanced Terracoin Client on Earth!</i>')
       lblSlogan.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
       lblDescr = QRichLabel( \
-         '<b>You are about to use the most secure and feature-rich Bitcoin client '
+         '<b>You are about to use the most secure and feature-rich Terracoin client '
          'software available!</b>  But please remember, this software '
          'is still <i>Beta</i> - Armory developers will not be held responsible '
-         'for loss of bitcoins resulting from the use of this software.'
+         'for loss of Terracoins resulting from the use of this software.'
          '<br><br>'
          '<b>To use Armory online</b>, '
-         'you must have Bitcoin-Qt (or bitcoind) open and synchronized '
-         'with the Bitcoin network.  You can download Bitcoin-Qt from <a '
-         'href=http://www.bitcoin.org>www.bitcoin.org</a>.  If you have '
-         'never run Bitcoin-Qt before, you will need to wait '
+         'you must have Terracoin-Qt (or Terracoind) open and synchronized '
+         'with the Terracoin network.  You can download Terracoin-Qt from <a '
+         'href=http://www.Terracoin.org>www.Terracoin.org</a>.  If you have '
+         'never run Terracoin-Qt before, you will need to wait '
          'for it to finish synchronizing before Armory '
          'will work.  <i>This may take many hours, but only needs to be done '
          'once!</i>  A green checkmark will appear in the '
-         'bottom-right corner of the Bitcoin-Qt window when it is finished.'
+         'bottom-right corner of the Terracoin-Qt window when it is finished.'
          '<br><br>'
-         'For more info about Armory, and Bitcoin itself, see '
+         'For more info about Armory, and Terracoin itself, see '
          '<a href="http://'
          'bitcoinarmory.com/index.php/frequently-asked-questions">frequently '
          'asked questions</a>.')
@@ -4413,7 +4413,7 @@ class DlgRemoveAddress(ArmoryDialog):
            'Simply deleting an address does not prevent anyone '
            'from sending money to it.  If you have given this address '
            'to anyone in the past, make sure that they know not to '
-           'use it again, since any bitcoins sent to it will be '
+           'use it again, since any Terracoins sent to it will be '
            'inaccessible.\n\n '
            'If you are maintaining an external copy of this address '
            'please ignore this warning\n\n'
@@ -4624,7 +4624,7 @@ class DlgConfirmSend(ArmoryDialog):
          recipLbls[-1].setFont(GETFONT('Fixed'))
 
       recipLbls.append(HLINE(QFrame.Sunken))
-      recipLbls.append(QLabel( 'Total bitcoins : '.ljust(37)  +
+      recipLbls.append(QLabel( 'Total Terracoins : '.ljust(37)  +
                         coin2str(totalSend, rJust=True, maxZeros=4)))
       recipLbls[-1].setFont(GETFONT('Fixed'))
 
@@ -4712,7 +4712,7 @@ class DlgSendBitcoins(ArmoryDialog):
 
       feetip = createToolTipObject( \
             'Transaction fees go to users who contribute computing power to '
-            'keep the Bitcoin network secure, and in return they get your transaction '
+            'keep the Terracoin network secure, and in return they get your transaction '
             'included in the blockchain faster.  <b>Most transactions '
             'do not require a fee</b> but it is recommended anyway '
             'since it guarantees quick processing for less than $0.01 USD and '
@@ -4795,7 +4795,7 @@ class DlgSendBitcoins(ArmoryDialog):
          lblNoSend.setText(
             '<font color=%s>'
             'You can sign this transaction, but you do not have '
-            'access to the Bitcoin network in order to broadcast '
+            'access to the Terracoin network in order to broadcast '
             'it.  However, you can create the transaction that '
             'you <i>want</i> to send, and then broadcast it from a computer '
             'that <i>is</i> connected to the network.</font>' % htmlColor('TextWarn'))
@@ -4803,7 +4803,7 @@ class DlgSendBitcoins(ArmoryDialog):
          lblNoSend = QRichLabel( \
             '<font color=%s>'
             'This is an "offline" wallet, which means that the '
-            'private keys needed to send bitcoins are not on this computer. '
+            'private keys needed to send Terracoins are not on this computer. '
             'However, you can create the transaction you would like to '
             'spend, then Armory will provide you with a file that can be '
             'signed by the computer that <i>does</i> have the private '
@@ -4819,7 +4819,7 @@ class DlgSendBitcoins(ArmoryDialog):
             'After clicking this button, you will be given directions for '
             'completing this transaction.')
          btnSend.setToolTip('This is a watching-only wallet! '
-                            'You cannot use it to send bitcoins!')
+                            'You cannot use it to send Terracoins!')
          btnSend.setEnabled(False)
 
 
@@ -4827,7 +4827,7 @@ class DlgSendBitcoins(ArmoryDialog):
       self.connect(btnUnsigned, SIGNAL('clicked()'), self.createOfflineTxDPAndDisplay)
 
       if not TheBDM.getBDMState()=='BlockchainReady':
-         btnSend.setToolTip('<u></u>You are currently not connected to the Bitcoin network, '
+         btnSend.setToolTip('<u></u>You are currently not connected to the Terracoin network, '
                             'so you cannot initiate any transactions.')
          btnSend.setEnabled(False)
          btnUnsigned.setEnabled(False)
@@ -4849,7 +4849,7 @@ class DlgSendBitcoins(ArmoryDialog):
       self.connect(btnDonate, SIGNAL("clicked()"), self.addDonation)
 
 
-      btnEnterURI = QPushButton('Manually Enter "bitcoin:" Link')
+      btnEnterURI = QPushButton('Manually Enter "Terracoin:" Link')
       ttipEnterURI = createToolTipObject( \
          'Armory does not always succeed at registering itself to handle '
          'URL links from webpages and email.  '
@@ -4899,7 +4899,7 @@ class DlgSendBitcoins(ArmoryDialog):
                'created this wallet solely for managing imported addresses, '
                'and want to keep all funds within existing addresses.')
          self.ttipSpecify = createToolTipObject( \
-               'You can specify any valid Bitcoin address for the change.  '
+               'You can specify any valid Terracoin address for the change.  '
                '<b>NOTE:</b> If the address you specify is not in this wallet, '
                'Armory will not be able to distinguish the outputs when it shows '
                'up in your ledger.  The change will look like a second recipient, '
@@ -5030,7 +5030,7 @@ class DlgSendBitcoins(ArmoryDialog):
       self.setLayout(layout)
 
       self.makeRecipFrame(1)
-      self.setWindowTitle('Send Bitcoins')
+      self.setWindowTitle('Send Terracoins')
       self.setMinimumHeight(self.maxHeight*20)
 
       loadCount      = self.main.settings.get('Load_Count')
@@ -5054,7 +5054,7 @@ class DlgSendBitcoins(ArmoryDialog):
          result = MsgBoxWithDNAA(MSGBOX.Question, 'Please donate!', \
             '<i>Armory</i> is the result of over 1,000 hours of development '
             'and dozens of late nights bug-hunting and testing.  Yet, this software '
-            'has been given to you for free to benefit the greater Bitcoin '
+            'has been given to you for free to benefit the greater Terracoin '
             'community! '
             '<br><br>However, continued development may not be possible without '
             'donations.  If you are satisfied with this software, please consider '
@@ -5250,7 +5250,7 @@ class DlgSendBitcoins(ArmoryDialog):
             return False
          except TooMuchPrecisionError:
             QMessageBox.critical(self, 'Too much precision', \
-               'Bitcoins can only be specified down to 8 decimal places. '
+               'Terracoins can only be specified down to 8 decimal places. '
                'The smallest value that can be sent is  0.0000 0001 BTC. '
                'Please enter a new amount for recipient %d.' % (i+1), QMessageBox.Ok)
             return False
@@ -5279,8 +5279,8 @@ class DlgSendBitcoins(ArmoryDialog):
          return False
       except TooMuchPrecisionError:
          QMessageBox.critical(self, 'Too much precision', \
-            'Bitcoins can only be specified down to 8 decimal places. '
-            'The smallest meaning Bitcoin amount is 0.0000 0001 BTC. '
+            'Terracoins can only be specified down to 8 decimal places. '
+            'The smallest meaning Terracoin amount is 0.0000 0001 BTC. '
             'Please enter a fee of at least 0.0000 0001', QMessageBox.Ok)
          return False
       except:
@@ -5782,7 +5782,7 @@ class DlgOfflineTxCreated(ArmoryDialog):
          'signatures.  You must '
          'take this data to the computer holding the private keys for this '
          'wallet to get the necessary signatures, then bring back the completed '
-         'transaction to be broadcast to the Bitcoin network.'
+         'transaction to be broadcast to the Terracoin network.'
          '<br><br>'
          'Use the "Save as file..." button '
          'to copy the <i>*.unsigned.tx</i> file to a USB key or other removable media.  '
@@ -5793,7 +5793,7 @@ class DlgOfflineTxCreated(ArmoryDialog):
          'On the next screen, you will be able to load the signed transaction, '
          'and then broadcast it if all signatures are valid.   In fact, the final, '
          'signed transaction can be finalized from <i>any</i> '
-         'computer that is running Armory and connected to the Bitcoin network.')
+         'computer that is running Armory and connected to the Terracoin network.')
       elif determineWalletType(wlt, self.main)[0]==WLTTYPES.WatchOnly: 
          lblDescr.setText( \
          'The chunk of data shown below is the complete transaction you just '
@@ -6115,7 +6115,7 @@ class DlgOfflineSelect(ArmoryDialog):
          'the private keys needed for it' )
          
       lblBroadc = QRichLabel( \
-         'Send a pre-signed transaction to the Bitcoin network to finalize it')
+         'Send a pre-signed transaction to the Terracoin network to finalize it')
 
       lblBroadc.setMinimumWidth( tightSizeNChar(lblBroadc, 45)[0] )
 
@@ -6175,7 +6175,7 @@ class DlgReviewOfflineTx(ArmoryDialog):
          'If the transaction is unsigned and you have the correct wallet, '
          'you will have the opportunity to sign it.  If it is already signed '
          'you will have the opportunity to broadcast it to '
-         'the Bitcoin network to make it final.')
+         'the Terracoin network to make it final.')
 
 
 
@@ -6229,7 +6229,7 @@ class DlgReviewOfflineTx(ArmoryDialog):
       ###
       self.infoLbls.append([])
       self.infoLbls[-1].append( createToolTipObject( \
-            'This is wallet from which the offline transaction spends bitcoins'))
+            'This is wallet from which the offline transaction spends Terracoins'))
       self.infoLbls[-1].append( QRichLabel('<b>Wallet:</b>'))
       self.infoLbls[-1].append( QRichLabel(''))
 
@@ -6369,7 +6369,7 @@ class DlgReviewOfflineTx(ArmoryDialog):
             self.btnBroadcast.setEnabled(True)
          else:
             self.btnBroadcast.setEnabled(False)
-            self.btnBroadcast.setToolTip('No connection to Bitcoin network!')
+            self.btnBroadcast.setToolTip('No connection to Terracoin network!')
 
       self.btnSave.setEnabled(True)
       self.btnCopyHex.setEnabled(False)
@@ -6622,15 +6622,15 @@ class DlgReviewOfflineTx(ArmoryDialog):
    def broadTx(self):
       if self.main.netMode == NETWORKMODE.Disconnected:
          QMessageBox.warning(self, 'No Internet!', \
-            'Armory lost its connection to Bitcoin-Qt, and cannot '
+            'Armory lost its connection to Terracoin-Qt, and cannot '
             'broadcast any transactions until it is reconnected. '
-            'Please verify that Bitcoin-Qt (or bitcoind) is open '
+            'Please verify that Terracoin-Qt (or Terracoind) is open '
             'and synchronized with the network.', QMessageBox.Ok)
          return
       elif self.main.netMode == NETWORKMODE.Offline:
          QMessageBox.warning(self, 'No Internet!', \
-            'You do not currently have a connection to the Bitcoin network. '
-            'If this does not seem correct, verify that Bitcoin-Qt is open '
+            'You do not currently have a connection to the Terracoin network. '
+            'If this does not seem correct, verify that Terracoin-Qt is open '
             'and synchronized with the network.', QMessageBox.Ok)
          return
 
@@ -6691,7 +6691,7 @@ class DlgReviewOfflineTx(ArmoryDialog):
             QMessageBox.information(self, 'Transaction Saved!',\
                'Your transaction has been saved to the following location:'
                '\n\n%s\n\nIt can now be broadcast from any computer with '
-               'a connection to the Bitcoin network.' % newSaveFile, QMessageBox.Ok)
+               'a connection to the Terracoin network.' % newSaveFile, QMessageBox.Ok)
             return
                
 
@@ -7055,7 +7055,7 @@ class DlgTxFeeOptions(ArmoryDialog):
 
       lblDescr = QLabel( \
          'Transaction fees go to people who contribute processing power to '
-         'the Bitcoin network to process transactions and keep it secure.') 
+         'the Terracoin network to process transactions and keep it secure.') 
       lblDescr2 = QLabel( \
          'Nearly all transactions are guaranteed to be '
          'processed if a fee of 0.0005 BTC is included (less than $0.01 USD).  You '
@@ -7290,7 +7290,7 @@ class DlgDispTxInfo(ArmoryDialog):
          #QMessageBox.critical(self, 'Non-Standard Transaction', \
            #'This is a non-standard transaction, which cannot be '
            #'interpretted by this program.  DO NOT ASSUME that you '
-           #'own these bitcoins, even if you see your address in '
+           #'own these Terracoins, even if you see your address in '
            #'any part of the transaction.  Only an expert can tell '
            #'you if and how these coins can be redeemed!  \n\n'
            #'If you would like more information, please copy the '
@@ -7350,7 +7350,7 @@ class DlgDispTxInfo(ArmoryDialog):
       if self.mode in (USERMODE.Expert,):
          # Add protocol version and locktime to the display
          lbls.append([])
-         lbls[-1].append(createToolTipObject('Bitcoin Protocol Version Number'))
+         lbls[-1].append(createToolTipObject('Terracoin Protocol Version Number'))
          lbls[-1].append(QLabel('Tx Version:'))
          lbls[-1].append(QLabel( str(self.pytx.version)))
 
@@ -7435,7 +7435,7 @@ class DlgDispTxInfo(ArmoryDialog):
       else:
          lbls.append([])
          lbls[-1].append(createToolTipObject(
-               'Bitcoins were either sent or received, or sent-to-self'))
+               'Terracoins were either sent or received, or sent-to-self'))
          lbls[-1].append(QLabel('Transaction Direction:'))
          lbls[-1].append(QRichLabel( txdir ))
 
@@ -7455,7 +7455,7 @@ class DlgDispTxInfo(ArmoryDialog):
          fee = data[FIELDS.SumIn]-data[FIELDS.SumOut]
          lbls.append([])
          lbls[-1].append(createToolTipObject( 
-            'Transaction fees go to users supplying the Bitcoin network with '
+            'Transaction fees go to users supplying the Terracoin network with '
             'computing power for processing transactions and maintaining security.'))
          lbls[-1].append(QLabel('Tx Fee Paid:'))
          lbls[-1].append(QLabel( coin2str(fee, maxZeros=0).strip() + '  BTC'))
@@ -8063,13 +8063,13 @@ class DlgBadConnection(ArmoryDialog):
             'restart Armory.<br><br>Would you like to continue in "Offline" mode? ')
       elif haveInternet and not haveSatoshi:
          lblDescr = QRichLabel( \
-            'Armory was not able to detect the presence of Bitcoin-Qt or bitcoind '
-            'client software (available at http://www.bitcoin.org).  Please make sure that '
+            'Armory was not able to detect the presence of Terracoin-Qt or Terracoind '
+            'client software (available at http://www.Terracoin.org).  Please make sure that '
             'the one of those programs is... <br>'
             '<br><b>(1)</b> ...open and connected to the network '
             '<br><b>(2)</b> ...on the same network as Armory (main-network or test-network)'
             '<br><b>(3)</b> ...synchronized with the blockchain before '
-            'starting Armory<br><br>Without the Bitcoin-Qt or bitcoind open, you will only '
+            'starting Armory<br><br>Without the Terracoin-Qt or Terracoind open, you will only '
             'be able to run Armory in "Offline" mode, which will not have access '
             'to new blockchain data, and you will not be able to send outgoing '
             'transactions<br><br>If you do not want to be in "Offline" mode, please '
@@ -8347,7 +8347,7 @@ class DlgECDSACalc(ArmoryDialog):
       ttipPrvR = createToolTipObject( \
          'Any standard encoding of a private key:  raw hex, base58, with or '
          'without checksums, and mini-private-key format. '
-         'This includes VanityGen addresses and Casascius physical Bitcoin '
+         'This includes VanityGen addresses and Casascius physical Terracoin '
          'private keys.')
       ttipPriv = createToolTipObject( \
          'The raw hexadecimal private key.  This is exactly 32 bytes, which '
@@ -8362,7 +8362,7 @@ class DlgECDSACalc(ArmoryDialog):
       ttipHash = createToolTipObject( \
          'Raw hash160 of the [65-byte] public key.  It is 20 bytes (40 hex chars).')
       ttipAddr = createToolTipObject( \
-         'Standard Bitcoin address expressed in Base58')
+         'Standard Terracoin address expressed in Base58')
 
 
       btnAbk = createAddrBookButton(self, self.txtAddr, None, 'Select', True)
@@ -8372,7 +8372,7 @@ class DlgECDSACalc(ArmoryDialog):
       headPubF  = makeHorizFrame([QLabel('Full Public Key'), ttipPubF, 'Stretch'])
       headPubXY = makeHorizFrame([QLabel('Raw Public Key (x,y)'), ttipPubXY, 'Stretch'])
       headHash  = makeHorizFrame([QLabel('Public Key Hash160'), ttipHash, 'Stretch'])
-      headAddr  = makeHorizFrame([btnAbk, QLabel('Bitcoin Address'), ttipAddr, 'Stretch'])
+      headAddr  = makeHorizFrame([btnAbk, QLabel('Terracoin Address'), ttipAddr, 'Stretch'])
       
       keyDataLayout = QGridLayout()
       keyDataLayout.addWidget(headPrvR,                      0,0,  1,1)
@@ -8652,9 +8652,9 @@ class DlgECDSACalc(ArmoryDialog):
 
       
       lblDescr = QRichLabel( \
-         'Use this form to perform Bitcoin elliptic curve calculations.  All '
+         'Use this form to perform Terracoin elliptic curve calculations.  All '
          'operations are performed on the secp256k1 elliptic curve, which is '
-         'the one used for Bitcoin. '
+         'the one used for Terracoin. '
          'Supply all values as 32-byte, big-endian, hex-encoded integers.')
 
       btnClear = QPushButton('Clear')
@@ -8798,14 +8798,14 @@ class DlgECDSACalc(ArmoryDialog):
             raw25byte = base58_to_binary(addrB58)
             if len(raw25byte)!=25:
                QMessageBox.critical(self, 'Invalid Address', \
-               'The Bitcoin address supplied is invalid.', QMessageBox.Ok)
+               'The Terracoin address supplied is invalid.', QMessageBox.Ok)
                return
             data,chk = raw25byte[:21], raw25byte[21:]
             fixedData = verifyChecksum(data,chk)
             if fixedData!=data:
                if len(fixedData)==0:
                   QMessageBox.critical(self, 'Invalid Address', \
-                  'The Bitcoin address has an error in it.  Please double-check '
+                  'The Terracoin address has an error in it.  Please double-check '
                   'that it was entered properly.', QMessageBox.Ok)
                   return
             self.txtAddr.setText(hash160_to_addrStr(fixedData[1:]))
@@ -8960,7 +8960,7 @@ class DlgECDSACalc(ArmoryDialog):
       self.txtPubX.setText(pubKeyHex[2:2+64        ]);
       self.txtPubY.setText(pubKeyHex[  2+64:2+64+64]);
 
-      modMsg = 'Bitcoin Signed Message:\n' + strMsg
+      modMsg = 'Terracoin Signed Message:\n' + strMsg
       sig = CryptoECDSA().SignData(SecureBinaryData(modMsg), \
                                    binPriv)
       self.txtSig.setText(sig.toHexStr())
@@ -9000,14 +9000,14 @@ class DlgECDSACalc(ArmoryDialog):
            'Need the original message in order to verify the signature.', QMessageBox.Ok)
          return
 
-      modMsg = 'Bitcoin Signed Message:\n' + strMsg
+      modMsg = 'Terracoin Signed Message:\n' + strMsg
       isValid = CryptoECDSA().VerifyData(SecureBinaryData(modMsg), \
                                          SecureBinaryData(binSig), \
                                          SecureBinaryData(binPub))
 
       if isValid:
          MsgBoxCustom(MSGBOX.Good, 'Verified!', \
-            'The owner of the following Bitcoin address...'
+            'The owner of the following Terracoin address...'
             '<br><br>'
             '<b>%s</b>'
             '<br><br>'
@@ -9136,7 +9136,7 @@ class DlgECDSACalc(ArmoryDialog):
       if not CryptoECDSA().ECVerifyPoint(binBx, binBy):
          QMessageBox.critical(self, 'Invalid EC Point', \
             'The point you specified (<b>B</b>) is not on the '
-            'elliptic curved used in Bitcoin (secp256k1).', QMessageBox.Ok)
+            'elliptic curved used in Terracoin (secp256k1).', QMessageBox.Ok)
          return
 
       C = CryptoECDSA().ECMultiplyPoint(binA, binBx, binBy)
@@ -9158,13 +9158,13 @@ class DlgECDSACalc(ArmoryDialog):
       if not CryptoECDSA().ECVerifyPoint(binAx, binAy):
          QMessageBox.critical(self, 'Invalid EC Point', \
             'The point you specified (<b>A</b>) is not on the '
-            'elliptic curved used in Bitcoin (secp256k1).', QMessageBox.Ok)
+            'elliptic curved used in Terracoin (secp256k1).', QMessageBox.Ok)
          return
 
       if not CryptoECDSA().ECVerifyPoint(binBx, binBy):
          QMessageBox.critical(self, 'Invalid EC Point', \
             'The point you specified (<b>B</b>) is not on the '
-            'elliptic curved used in Bitcoin (secp256k1).', QMessageBox.Ok)
+            'elliptic curved used in Terracoin (secp256k1).', QMessageBox.Ok)
          return
 
       C = CryptoECDSA().ECAddPoints(binAx, binAy, binBx, binBy)
@@ -9231,7 +9231,7 @@ class DlgAddressBook(ArmoryDialog):
       if self.isBrowsingOnly or selectExistingOnly:
          lblDescr = QRichLabel('Browse all receiving addresses in '
                                'this wallet, and all addresses to which this '
-                               'wallet has sent bitcoins.')
+                               'wallet has sent Terracoins.')
 
       lblToWlt  = QRichLabel('<b>Send to Wallet:</b>')
       lblToAddr = QRichLabel('<b>Send to Address:</b>')
@@ -9615,7 +9615,7 @@ class DlgHelpAbout(ArmoryDialog):
       imgLogo.setPixmap(QPixmap(':/armory_logo_h56.png'))
       imgLogo.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
-      lblHead = QRichLabel('Armory Bitcoin Client : Version %s-beta' % \
+      lblHead = QRichLabel('Armory Terracoin Client : Version %s-beta' % \
                                     getVersionString(BTCARMORY_VERSION), doWrap=False)
       lblWebpage = QRichLabel('<a href="http://www.bitcoinarmory.com">http://www.bitcoinarmory.com</a>')
       lblWebpage.setOpenExternalLinks(True)
@@ -9650,7 +9650,7 @@ class DlgPreferences(ArmoryDialog):
       lblDefaultFee = QRichLabel('<b>Default fee to include with transactions:</b><br>')
       lblDefaultDescr = QRichLabel( \
                                  'Fees go to users that contribute computing power '
-                                 'to keep the Bitcoin network secure and increases '
+                                 'to keep the Terracoin network secure and increases '
                                  'the priority of your transactions on the network '
                                  '(%s BTC is standard).' % \
                                  coin2str(MIN_TX_FEE, maxZeros=0).strip())
@@ -9703,10 +9703,10 @@ class DlgPreferences(ArmoryDialog):
       notifyDiscon = self.main.getSettingOrSetDefault('NotifyDiscon', True)
       notifyReconn = self.main.getSettingOrSetDefault('NotifyReconn', True)
 
-      self.chkBtcIn  = QCheckBox('Bitcoins Received')
-      self.chkBtcOut = QCheckBox('Bitcoins Sent')
-      self.chkDiscon = QCheckBox('Bitcoin-Qt/bitcoind disconnected')
-      self.chkReconn = QCheckBox('Bitcoin-Qt/bitcoind reconnected')
+      self.chkBtcIn  = QCheckBox('Terracoins Received')
+      self.chkBtcOut = QCheckBox('Terracoins Sent')
+      self.chkDiscon = QCheckBox('Terracoin-Qt/Terracoind disconnected')
+      self.chkReconn = QCheckBox('Terracoin-Qt/Terracoind reconnected')
       self.chkBtcIn.setChecked(notifyBtcIn)
       self.chkBtcOut.setChecked(notifyBtcOut)
       self.chkDiscon.setChecked(notifyDiscon)
@@ -9909,7 +9909,7 @@ class DlgPreferences(ArmoryDialog):
       #self.Options.append( ['LineEdit', 'Default_Fee', MIN_TX_FEE, \
                            #'Default fee to include with transactions.', \
                            #'Fees go to users that contribute computing power '
-                           #'to keep the Bitcoin network secure (0.0005 BTC is '
+                           #'to keep the Terracoin network secure (0.0005 BTC is '
                            #'standard).', \
                            #'NOTE: some transactions will require a fee '
                            #'regardless of your preferences -- in such cases '
@@ -9961,7 +9961,7 @@ class DlgPreferences(ArmoryDialog):
       if modestr.lower() == 'standard':
          strDescr += \
             ('"Standard" is for users that only need the core set of features '
-             'to send and receive bitcoins.  This includes maintaining multiple '
+             'to send and receive Terracoins.  This includes maintaining multiple '
              'wallets, wallet encryption, and the ability to make backups '
              'of your wallets.')
       elif modestr.lower() == 'advanced':
@@ -9975,7 +9975,7 @@ class DlgPreferences(ArmoryDialog):
             ('"Expert" mode is similar to "Advanced" but includes '
              'access to lower-level info about transactions, scripts, keys '
              'and network protocol.  Most extra functionality is geared '
-             'towards Bitcoin software developers.')
+             'towards Terracoin software developers.')
       self.lblUsermodeDescr.setText(strDescr)
 
 
@@ -10344,8 +10344,8 @@ class DlgRequestPayment(ArmoryDialog):
 
       lblDescr = QRichLabel( \
          'Create a clickable link that you can copy into email or webpage to '
-         'request a payment.   If the user is running a Bitcoin program ' 
-         'that supports "bitcoin:" links, that program will open with '
+         'request a payment.   If the user is running a Terracoin program ' 
+         'that supports "Terracoin:" links, that program will open with '
          'all this information pre-filled after they click the link.')
 
       lblDescr.setContentsMargins(5, 5, 5, 5)
@@ -10353,8 +10353,8 @@ class DlgRequestPayment(ArmoryDialog):
 
 
       ttipPreview = createToolTipObject( \
-         'The following Bitcoin desktop applications <i>try</i> to '
-         'register themselves with your computer to handle "bitcoin:" '
+         'The following Terracoin desktop applications <i>try</i> to '
+         'register themselves with your computer to handle "Terracoin:" '
          'links: Armory, Multibit, Electrum')
       ttipLinkText = createToolTipObject( \
          'This is the text to be shown as the clickable link.  It should '
@@ -10363,7 +10363,7 @@ class DlgRequestPayment(ArmoryDialog):
       ttipAmount = createToolTipObject( \
          'All amounts are specifed in BTC')
       ttipAddress = createToolTipObject( \
-         'The person clicking the link will be sending bitcoins to this address')
+         'The person clicking the link will be sending Terracoins to this address')
       ttipMessage = createToolTipObject( \
          'This text will be pre-filled as the label/comment field '
          'after the user clicks on the link. They '
@@ -10763,11 +10763,11 @@ class DlgUriCopyAndPaste(ArmoryDialog):
       super(DlgUriCopyAndPaste, self).__init__(parent, main)
 
       self.uriDict = {}
-      lblDescr = QRichLabel('Copy and paste a raw bitcoin URL string here.  '
-                            'A valid string starts with "bitcoin:" followed '
-                            'by a bitcoin address.'
+      lblDescr = QRichLabel('Copy and paste a raw Terracoin URL string here.  '
+                            'A valid string starts with "Terracoin:" followed '
+                            'by a Terracoin address.'
                             '<br><br>'
-                            'You should use this feature if there is a "bitcoin:" '
+                            'You should use this feature if there is a "Terracoin:" '
                             'link in a webpage or email that does not load Armory '
                             'when you click on it.  Instead, right-click on the '
                             'link and select "Copy Link Location" then paste it '
@@ -10949,7 +10949,7 @@ class dlgRawTx(ArmoryDialog):
 
       
       lblRaw = QRichLabel('You may paste raw transaction data into the box below, '
-                          'and then click "Broadcast" to send it to the Bitcoin '
+                          'and then click "Broadcast" to send it to the Terracoin '
                           'network.  If the transaction has been broadcast before, '
                           'attempting to send it again is unlikely to do anything.')
 

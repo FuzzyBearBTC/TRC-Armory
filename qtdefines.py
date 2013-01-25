@@ -634,10 +634,10 @@ class ArmoryDialog(QDialog):
       self.setFont(GETFONT('var'))
 
       if USE_TESTNET:
-         self.setWindowTitle('Armory - Bitcoin Wallet Management [TESTNET]')
+         self.setWindowTitle('Armory - Terracoin Wallet Management [TESTNET]')
          self.setWindowIcon(QIcon(':/armory_icon_green_32x32.png'))
       else:
-         self.setWindowTitle('Armory - Bitcoin Wallet Management [MAIN NETWORK]')
+         self.setWindowTitle('Armory - Terracoin Wallet Management [MAIN NETWORK]')
          self.setWindowIcon(QIcon(':/armory_icon_32x32.png'))
 
 

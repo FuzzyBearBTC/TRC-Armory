@@ -117,7 +117,7 @@ class ArmoryMainWindow(QMainWindow):
       # If we're going into online mode, start loading blockchain
       self.loadBlockchainIfNecessary()
 
-      # Setup system tray and register "bitcoin:" URLs with the OS
+      # Setup system tray and register "Terracoin:" URLs with the OS
       self.setupSystemTray()
       self.setupUriRegistration()
 
@@ -771,20 +771,20 @@ class ArmoryMainWindow(QMainWindow):
    #############################################################################
    def setupUriRegistration(self):
       """
-      Setup Armory as the default application for handling bitcoin: links
+      Setup Armory as the default application for handling terracoin: links
       """
       # Don't bother the user on the first load with it if verification is 
       # needed.  They have enough to worry about with this weird new program.
       isFirstLoad = self.getSettingOrSetDefault('First_Load', True)
 
       if OS_LINUX:
-         out,err = execAndWait('gconftool-2 --get /desktop/gnome/url-handlers/bitcoin/command')
+         out,err = execAndWait('gconftool-2 --get /desktop/gnome/url-handlers/terracoin/command')
       
          def setAsDefault():
             LOGINFO('Setting up Armory as default URI handler...')
-            execAndWait('gconftool-2 -t string -s /desktop/gnome/url-handlers/bitcoin/command "python /usr/share/armory/ArmoryQt.py \"%s\""')
-            execAndWait('gconftool-2 -s /desktop/gnome/url-handlers/bitcoin/needs_terminal false -t bool')
-            execAndWait('gconftool-2 -t bool -s /desktop/gnome/url-handlers/bitcoin/enabled true')
+            execAndWait('gconftool-2 -t string -s /desktop/gnome/url-handlers/terracoin/command "python /usr/share/armory/ArmoryQt.py \"%s\""')
+            execAndWait('gconftool-2 -s /desktop/gnome/url-handlers/terracoin/needs_terminal false -t bool')
+            execAndWait('gconftool-2 -t bool -s /desktop/gnome/url-handlers/terracoin/enabled true')
 
 
          if 'no value' in out.lower() or 'no value' in err.lower():
@@ -795,7 +795,7 @@ class ArmoryMainWindow(QMainWindow):
             if not self.getSettingOrSetDefault('DNAA_DefaultApp', False):
                reply = MsgBoxWithDNAA(MSGBOX.Question, 'Default URL Handler', \
                   'Armory is not set as your default application for handling '
-                  '"bitcoin:" links.  Would you like to use Armory as the '
+                  '"terracoin:" links.  Would you like to use Armory as the '
                   'default?', 'Do not ask this question again')
                if reply[0]==True:
                   setAsDefault()
@@ -805,7 +805,7 @@ class ArmoryMainWindow(QMainWindow):
       if OS_WINDOWS:
          # Check for existing registration (user first, then root, if necessary)
          action = 'DoNothing'
-         rootKey = 'bitcoin\\shell\\open\\command'
+         rootKey = 'terracoin\\shell\\open\\command'
          try:
             userKey = 'Software\\Classes\\' + rootKey
             registryKey = OpenKey(HKEY_CURRENT_USER, userKey, 0, KEY_READ)
@@ -835,7 +835,7 @@ class ArmoryMainWindow(QMainWindow):
             # If another application has it, ask for permission to change it
             reply = MsgBoxWithDNAA(MSGBOX.Question, 'Default URL Handler', \
                'Armory is not set as your default application for handling '
-               '"bitcoin:" links.  Would you like to use Armory as the '
+               '"terracoin:" links.  Would you like to use Armory as the '
                'default?', 'Do not ask this question again')
 
             if reply[1]==True:
@@ -851,13 +851,13 @@ class ArmoryMainWindow(QMainWindow):
             x86str = '' if platform.architecture()[0][:2]=='32' else ' (x86)'
             baseDir = 'C:\\Program Files%s\\Armory\\Armory Bitcoin Client' % x86str
             regKeys = []
-            regKeys.append(['Software\\Classes\\bitcoin', '', 'URL:bitcoin Protocol'])
-            regKeys.append(['Software\\Classes\\bitcoin', 'URL Protocol', ""])
-            regKeys.append(['Software\\Classes\\bitcoin\\shell', '', None])
-            regKeys.append(['Software\\Classes\\bitcoin\\shell\\open', '',  None])
-            regKeys.append(['Software\\Classes\\bitcoin\\shell\\open\\command',  '', \
+            regKeys.append(['Software\\Classes\\terracoin', '', 'URL:terracoin Protocol'])
+            regKeys.append(['Software\\Classes\\terracoin', 'URL Protocol', ""])
+            regKeys.append(['Software\\Classes\\terracoin\\shell', '', None])
+            regKeys.append(['Software\\Classes\\terracoin\\shell\\open', '',  None])
+            regKeys.append(['Software\\Classes\\terracoin\\shell\\open\\command',  '', \
                            '"%s\\Armory.exe" %%1' % baseDir])
-            regKeys.append(['Software\\Classes\\bitcoin\\DefaultIcon', '',  \
+            regKeys.append(['Software\\Classes\\terracoin\\DefaultIcon', '',  \
                            '"%s\\armory48x48.ico"' % baseDir])
 
             for key,name,val in regKeys:
@@ -1150,7 +1150,7 @@ class ArmoryMainWindow(QMainWindow):
                self.internetAvail = False
 
       LOGINFO('Internet connection is Available: %s', self.internetAvail)
-      LOGINFO('Terracoin-Qt/bitcoind is Available: %s', self.bitcoindIsAvailable())
+      LOGINFO('Terracoin-Qt/terracoind is Available: %s', self.bitcoindIsAvailable())
          
       TimerStop('setupNetworking')
 
@@ -1193,7 +1193,7 @@ class ArmoryMainWindow(QMainWindow):
    #############################################################################
    def bitcoindIsAvailable(self):
       # Check for Satoshi-client connection
-      TimerStart('bitcoindIsAvail')
+      TimerStart('terracoindIsAvail')
       s = socket.socket()
       s.settimeout(0.01)   # blocking, so short timeout -- but localhost is FAST
       try:
@@ -1203,7 +1203,7 @@ class ArmoryMainWindow(QMainWindow):
       except:
          return False
       finally:
-         TimerStop('bitcoindIsAvail')
+         TimerStop('terracoindIsAvail')
 
 
    #############################################################################
@@ -1229,7 +1229,7 @@ class ArmoryMainWindow(QMainWindow):
             try:
                self.sysTray.showMessage('Disconnected', \
                      'Connection to Terracoin-Qt client lost!  Armory cannot send \n'
-                     'or receive bitcoins until connection is re-established.', \
+                     'or receive terracoins until connection is re-established.', \
                      QSystemTrayIcon.Critical, 10000)
             except:
                LOGEXCEPT('Failed to show disconnect notification')
@@ -1286,10 +1286,10 @@ class ArmoryMainWindow(QMainWindow):
       LOGINFO(uriStr.replace('%','%%'))
       uriDict = parseBitcoinURI(uriStr)
       if TheBDM.getBDMState() in ('Offline','Uninitialized'):
-         LOGERROR('%sed "bitcoin:" link in offline mode.' % ClickOrEnter)
+         LOGERROR('%sed "terracoin:" link in offline mode.' % ClickOrEnter)
          self.bringArmoryToFront() 
          QMessageBox.warning(self, 'Offline Mode',
-            'You %sed on a "bitcoin:" link, but Armory is in '
+            'You %sed on a "terracoin:" link, but Armory is in '
             'offline mode, and is not capable of creating transactions. '
             '%sing links will only work if Armory is connected '
             'to the Terracoin network!' % (clickOrEnter, ClickOrEnter), \
@@ -1297,7 +1297,7 @@ class ArmoryMainWindow(QMainWindow):
          return {}
          
       if len(uriDict)==0:
-         warnMsg = ('It looks like you just %sed a "bitcoin:" link, but '
+         warnMsg = ('It looks like you just %sed a "terracoin:" link, but '
                     'that link is malformed.  ' % clickOrEnter)
          if self.usermode == USERMODE.Standard:
             warnMsg += ('Please check the source of the link and enter the '
@@ -1309,10 +1309,10 @@ class ArmoryMainWindow(QMainWindow):
          return {}
 
       if not uriDict.has_key('address'):
-         QMessageBox.warning(self, 'The "bitcoin:" link you just %sed '
+         QMessageBox.warning(self, 'The "terracoin:" link you just %sed '
             'does not even contain an address!  There is nothing that '
             'Armory can do with this link!' % clickOrEnter, QMessageBox.Ok)
-         LOGERROR('No address in "bitcoin:" link!  Nothing to do!')
+         LOGERROR('No address in "terracoin:" link!  Nothing to do!')
          return {}
 
       # Verify the URI is for the same network as this Armory instnance
@@ -1322,7 +1322,7 @@ class ArmoryMainWindow(QMainWindow):
          if NETWORKS.has_key(theAddrByte):
             net = NETWORKS[theAddrByte]
          QMessageBox.warning(self, 'Wrong Network!', \
-            'The address for the "bitcoin:" link you just %sed is '
+            'The address for the "terracoin:" link you just %sed is '
             'for the wrong network!  You are on the <b>%s</b> '
             'and the address you supplied is for the the '
             '<b>%s</b>!' % (clickOrEnter, NETWORKS[ADDRBYTE], net), \
@@ -1334,7 +1334,7 @@ class ArmoryMainWindow(QMainWindow):
       recognized = ['address','version','amount','label','message']
       for key,value in uriDict.iteritems():
          if key.startswith('req-') and not key[4:] in recognized:
-            QMessageBox.warning(self,'Unsupported URI', 'The "bitcoin:" link '
+            QMessageBox.warning(self,'Unsupported URI', 'The "terracoin:" link '
                'you just %sed contains fields that are required but not '
                'recognized by Armory.  This may be an older version of Armory, '
                'or the link you %sed on uses an exotic, unsupported format.'
@@ -1351,7 +1351,7 @@ class ArmoryMainWindow(QMainWindow):
    def uriLinkClicked(self, uriStr):
       if not TheBDM.getBDMState()=='BlockchainReady':
          QMessageBox.warning(self, 'Offline', \
-            'You just clicked on a "bitcoin:" link, but Armory is offline ' 
+            'You just clicked on a "terracoin:" link, but Armory is offline ' 
             'and cannot send transactions.  Please click the link '
             'again when Armory is online.', \
             QMessageBox.Ok)
@@ -1636,7 +1636,7 @@ class ArmoryMainWindow(QMainWindow):
                'Blockchain Loaded!', 'Blockchain loading is complete.  '
                'Your balances and transaction history are now available '
                'under the "Transactions" tab.  You can also send and '
-               'receive bitcoins.', \
+               'receive terracoins.', \
                dnaaMsg='Do not show me this notification again ', yesStr='OK')
                   
             if remember==True:
@@ -3108,14 +3108,14 @@ class ArmoryMainWindow(QMainWindow):
                              'If you are new to Armory and/or Terracoin-Qt, '
                              'please visit the Armory '
                              'webpage for more information.  Start at '
-                             '<a href="http://bitcoinarmory.com/index.php/armory-and-bitcoin-qt">'
+                             '<a href="http://bitcoinarmory.com/index.php/armory-and-terracoin-qt">'
                              'Why Armory needs Terracoin-Qt</a> or go straight to our <a '
                              'href="http://bitcoinarmory.com/index.php/frequently-asked-questions">'
                              'frequently asked questions</a> page for more general information.'
                              '<br><br>'
                              'If you already know what you\'re doing and simply need '
                              'to fetch the latest version of Terracoin-Qt, you can download it from '
-                             '<a href="http://www.bitcoin.org">http://www.bitcoin.org</a>.')
+                             '<a href="http://www.terracoin.org">http://www.terracoin.org</a>.')
                else:
                   LOGDEBUG('Satoshi client and internet not available')
                   lblText = ('No internet connection was detected, and neither '

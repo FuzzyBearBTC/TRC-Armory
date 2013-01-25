@@ -11,7 +11,9 @@
 # on upgrading its security features and other capabilities.
 #
 ################################################################################
-
+## Modified on 25th Jan 2013 to be the Terracoin Armory by FuzzyBear
+## Appears to be working and stable version but please raise any bugs
+################################################################################
 
       #####
    #####
@@ -34,7 +36,7 @@
 #
 # Where possible this follows conventions established by the Satoshi client.
 # Does not require armory to be installed or running, this is a standalone application.
-# Requires bitcoind process to be running before starting armory-daemon.
+# Requires terracoind process to be running before starting armory-daemon.
 # Requires an armory watch-only wallet to be in the same folder as the
 # armory-daemon script.
 # Works with testnet, use --testnet flag when starting the script.
