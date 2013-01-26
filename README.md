@@ -8,11 +8,16 @@ lost or overwritten wallet files.
 
 To install on linux run the following commands:
 
-sudo apt-get install git-core build-essential pyqt4-dev-tools swig libqtcore4 libqt4-dev python-qt4 python-dev python-twisted
-git clone https://github.com/FuzzyBearBTC/TRC-Armory.git
-cd ./TRC-Armory
-make
-python ArmoryQt.py
+
+1)  sudo apt-get install git-core build-essential pyqt4-dev-tools swig libqtcore4 libqt4-dev python-qt4 python-dev python-twisted
+
+2)  git clone https://github.com/FuzzyBearBTC/TRC-Armory.git
+
+3)  cd ./TRC-Armory
+
+4)  make
+
+5)  python ArmoryQt.py
 
 and that's it!!!
 
