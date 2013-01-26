@@ -146,17 +146,17 @@ if OS_WINDOWS:
    OS_NAME         = 'Windows'
    USER_HOME_DIR   = os.getenv('APPDATA')
    BTC_HOME_DIR    = os.path.join(USER_HOME_DIR, 'Terracoin', SUBDIR)
-   ARMORY_HOME_DIR = os.path.join(USER_HOME_DIR, 'Armory', SUBDIR)
+   ARMORY_HOME_DIR = os.path.join(USER_HOME_DIR, 'TRCArmory', SUBDIR)
 elif OS_LINUX:
    OS_NAME         = 'Linux'
    USER_HOME_DIR   = os.getenv('HOME')
    BTC_HOME_DIR    = os.path.join(USER_HOME_DIR, '.terracoin', SUBDIR)
-   ARMORY_HOME_DIR = os.path.join(USER_HOME_DIR, '.armory', SUBDIR)
+   ARMORY_HOME_DIR = os.path.join(USER_HOME_DIR, '.trcarmory', SUBDIR)
 elif OS_MACOSX:
    OS_NAME         = 'Mac/OSX'
    USER_HOME_DIR   = os.path.expanduser('~/Library/Application Support')
    BTC_HOME_DIR    = os.path.join(USER_HOME_DIR, 'Terracoin', SUBDIR)
-   ARMORY_HOME_DIR = os.path.join(USER_HOME_DIR, 'Armory', SUBDIR)
+   ARMORY_HOME_DIR = os.path.join(USER_HOME_DIR, 'TRCArmory', SUBDIR)
 else:
    print '***Unknown operating system!'
    print '***Cannot determine default directory locations'
