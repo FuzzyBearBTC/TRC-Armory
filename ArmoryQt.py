@@ -2402,10 +2402,10 @@ class ArmoryMainWindow(QMainWindow):
                   '<br><br>On some occasions the transaction actually did succeed '
                   'and this message is the bug itself!  To confirm whether the '
                   'the transaction actually succeeded, you can try this direct link '
-                  'to blockchain.info:'
+                  'to http://www.cryptocoinexplorer.com:3750'
                   '<br><br>'
-                  '<a href="http://blockchain.info/search/%s">'
-                  'http://blockchain.info/search/%s...</a>.  '
+                  '<a href="http://www.cryptocoinexplorer.com:3750">'
+                  'http://www.cryptocoinexplorer.com:3750...</a>.  '
                   '<br><br>'
                   'If you do not see the '
                   'transaction on that webpage within one minute, it failed and you '
@@ -2719,7 +2719,7 @@ class ArmoryMainWindow(QMainWindow):
          return
       
       actViewTx     = menu.addAction("View Details")
-      actViewBlkChn = menu.addAction("View on www.blockchain.info")
+      actViewBlkChn = menu.addAction("View on www.cryptocoinexplorer.com:3750")
       actComment    = menu.addAction("Change Comment")
       actCopyTxID   = menu.addAction("Copy Transaction ID")
       actOpenWallet = menu.addAction("Open Relevant Wallet")
@@ -2730,7 +2730,7 @@ class ArmoryMainWindow(QMainWindow):
       txHash = hex_switchEndian(txHash)
       wltID  = str(self.ledgerView.model().index(row, LEDGERCOLS.WltID).data().toString())
 
-      blkchnURL = 'http://blockchain.info/tx/%s' % txHash
+      blkchnURL = 'http://www.cryptocoinexplorer.com:3750/tx/%s' % txHash
 
       if action==actViewTx:
          self.showLedgerTx()
@@ -2741,7 +2741,7 @@ class ArmoryMainWindow(QMainWindow):
          except: 
             QMessageBox.critical(self, 'Could not open browser', \
                'Armory encountered an error opening your web browser.  To view '
-               'this transaction on blockchain.info, please copy and paste '
+               'this transaction on http://www.cryptocoinexplorer.com:3750, please copy and paste '
                'the following URL into your browser: '
                '<br><br>%s' % blkchnURL, QMessageBox.Ok)
       elif action==actCopyTxID:

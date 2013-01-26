@@ -906,7 +906,7 @@ class DlgWalletDetails(ArmoryDialog):
       
       if True:  actionCopyAddr    = menu.addAction("Copy Address")
       if True:  actionShowQRCode  = menu.addAction("Display Address QR Code")
-      if True:  actionBlkChnInfo  = menu.addAction("View Address on www.blockchain.info")
+      if True:  actionBlkChnInfo  = menu.addAction("View Address on www.cryptocoinexplorer.com:3750")
       if True:  actionReqPayment  = menu.addAction("Request Payment to this Address")
       if dev:   actionCopyHash160 = menu.addAction("Copy Hash160 (hex)")
       if True:  actionCopyComment = menu.addAction("Copy Comment")
@@ -920,12 +920,12 @@ class DlgWalletDetails(ArmoryDialog):
       elif action==actionBlkChnInfo:
          try:
             import webbrowser
-            blkchnURL = 'http://blockchain.info/address/%s' % addr
+            blkchnURL = 'http://www.cryptocoinexplorer.com:3750/address/%s' % addr
             webbrowser.open(blkchnURL)
          except:
             QMessageBox.critical(self, 'Could not open browser', \
                'Armory encountered an error opening your web browser.  To view '
-               'this address on blockchain.info, please copy and paste '
+               'this address on www.cryptocoinexplorer.com, please copy and paste '
                'the following URL into your browser: '
                '<br><br>%s' % blkchnURL, QMessageBox.Ok)
          return
